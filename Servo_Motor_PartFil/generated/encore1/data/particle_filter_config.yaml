@@ -1,0 +1,25 @@
+# particle_count: how many parallel hypotheses the particle filter keeps alive.
+particle_count: 160
+
+# 调参入口：初始化粒子的扩散范围。越大表示开局更分散，越小表示更靠近乐谱开头。
+# initial_spread_ms: how far particles are initially scattered from the beginning of the score.
+initial_spread_ms: 120.0
+
+# 调参入口：stepMs 的随机噪声强度。觉得它自己乱跑太多，就先把这里调小。
+# process_sigma_ms: random timing noise added each loop while the estimated performance moves forward.
+process_sigma_ms: 20.0
+
+# 调参入口：重采样后的抖动噪声。太大容易跳，太小容易所有粒子挤在一起。
+# resample_sigma_ms: extra jitter applied after resampling so particles do not collapse to one exact point.
+resample_sigma_ms: 8.0
+
+# 调参入口：音高匹配容忍度。越小越严格，越大越宽松。
+# pitch_sigma_hz: how tightly observed pitch must match the reference note to get high weight.
+pitch_sigma_hz: 16.0
+
+# 调参入口：stepMs 的基础下限。想让它无论如何都缓慢往前，就调这里。
+# minimum_step_ms: lowest forward movement allowed each loop, even if the random process model says slower.
+minimum_step_ms: 0.0
+
+# resample_threshold_ratio: resample only when ESS falls below this fraction of the total particle count.
+resample_threshold_ratio: 0.5

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Encore Score Prep</title>
+    <link rel="stylesheet" href="/styles.css?v=20260330h" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/opensheetmusicdisplay@1.9.2/build/opensheetmusicdisplay.min.js"
+    ></script>
+    <script type="module" src="/app.js?v=20260330h"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Encore Score Prep</p>
+          <h1>ENCORE</h1>
+        </div>
+        <div class="hero-actions">
+          <label class="upload-pill" for="fileInput">
+            <span>Upload MusicXML</span>
+            <input id="fileInput" type="file" accept=".musicxml,.xml,.mxl" />
+          </label>
+          <button id="exportButton" class="accent-button" disabled>Export JSON</button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="panel control-panel">
+          <div class="panel-header">
+            <h2>Setup</h2>
+            <p>Choose the part the runtime should track.</p>
+          </div>
+
+          <div class="card-grid">
+            <article class="summary-card">
+              <span class="card-label">Score</span>
+              <strong id="scoreTitle">No score loaded</strong>
+              <p id="scoreMeta">Upload a MusicXML or MXL file to begin.</p>
+            </article>
+            <article class="summary-card">
+              <span class="card-label">Export</span>
+              <strong id="exportPath">Nothing exported yet</strong>
+              <a id="downloadLink" class="download-link hidden" href="" target="_blank" rel="noreferrer">
+                Open exported JSON
+              </a>
+            </article>
+          </div>
+
+          <label class="field">
+            <span>Tracked part</span>
+            <select id="partSelect" disabled></select>
+          </label>
+
+          <div class="stats-row">
+            <div class="stat">
+              <span>Notes</span>
+              <strong id="noteCount">0</strong>
+            </div>
+            <div class="stat">
+              <span>Measures</span>
+              <strong id="measureCount">0</strong>
+            </div>
+            <div class="stat">
+              <span>Pages</span>
+              <strong id="pageCount">0</strong>
+            </div>
+            <div class="stat">
+              <span>Markers</span>
+              <strong id="markerCount">0</strong>
+            </div>
+          </div>
+
+          <div class="control-actions">
+            <button id="resetMarkersButton" class="ghost-button" disabled>Reset markers</button>
+          </div>
+
+          <p class="hint">
+            Best results come from choosing a mostly monophonic part. The runtime compares live
+            pitch against the selected part’s timed events.
+          </p>
+        </section>
+
+        <section class="panel score-panel">
+          <div class="panel-header">
+            <h2>Rendered Score</h2>
+            <p>Rendered in the browser for visual checking while you place markers.</p>
+          </div>
+          <div id="scoreCanvas" class="score-canvas">
+            <div id="scoreSurface" class="score-surface">
+              <div class="empty-state">
+                <strong>Rendered score will appear here.</strong>
+                <p>If the CDN is unavailable, marker editing still works with the parsed timeline.</p>
+              </div>
+            </div>
+            <div id="scoreOverlay" class="score-overlay hidden"></div>
+          </div>
+        </section>
+
+        <section class="panel marker-panel">
+          <div class="panel-header">
+            <h2>Page Turns</h2>
+            <p>For each page turn, first choose where the current page ends, then choose the note that should trigger the flip.</p>
+          </div>
+
+          <div class="editor-block">
+            <div class="subhead">
+              <h3>Turn List</h3>
+              <p id="turnHint">
+                Add one row per source page. The app keeps the page ranges contiguous and computes timing automatically from MusicXML.
+              </p>
+            </div>
+            <div class="turn-toolbar">
+              <button id="addTurnButton" class="ghost-button" disabled>Add next page</button>
+            </div>
+            <div id="turnList" class="marker-list"></div>
+          </div>
+        </section>
+      </main>
+
+      <footer id="statusBar" class="status-bar">Waiting for a score upload.</footer>
+    </div>
+  </body>
+</html>
