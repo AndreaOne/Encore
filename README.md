@@ -11,7 +11,7 @@ Sound-responsive auto page turner
 
 ![CAD model of the Encore electronics enclosure](docs/images/cad-enclosure.png)
 
-### Music-Stand Rack
+### Arm
 
 ![CAD model of the Encore music-stand rack](docs/images/cad-rack.png)
 
